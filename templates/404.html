@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Page not found — QuadCode{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="error-page">
+    <span class="code">404</span>
+    <h2 style="margin-top:18px;">This page doesn't scan.</h2>
+    <p style="color:var(--text-muted);margin-top:10px;max-width:400px;">The page you're looking for has moved or never existed.</p>
+    <a href="{{ url_for('main.home') }}" class="btn btn--primary" style="margin-top:26px;"><i class="fa-solid fa-house"></i> Back to home</a>
+  </div>
+</div>
+{% endblock %}

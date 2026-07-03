@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — QuadCode{% endblock %}
+
+{% block content %}
+<div class="container page-head">
+  <span class="eyebrow"><i class="fa-solid fa-chart-simple"></i> Dashboard</span>
+  <h1>Usage at a glance</h1>
+  <p>Totals, trends and the latest activity across every QR code you've generated.</p>
+</div>
+
+<div class="container" style="padding-bottom: 90px;">
+  <div class="stats-grid">
+    <div class="finder-card stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-qrcode"></i></div>
+      <div class="stat-value" id="statTotal">—</div>
+      <div class="stat-label">Total QR codes</div>
+    </div>
+    <div class="finder-card stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-calendar-day"></i></div>
+      <div class="stat-value" id="statToday">—</div>
+      <div class="stat-label">Generated today</div>
+    </div>
+    <div class="finder-card stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+      <div class="stat-value" id="statMostUsed">—</div>
+      <div class="stat-label">Most used type</div>
+    </div>
+    <div class="finder-card stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-download"></i></div>
+      <div class="stat-value" id="statDownloads">—</div>
+      <div class="stat-label">Total downloads</div>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="panel">
+      <h3><i class="fa-solid fa-layer-group"></i> QR codes by type</h3>
+      <div id="typeBreakdown"></div>
+    </div>
+    <div class="panel">
+      <h3><i class="fa-solid fa-bolt"></i> Recent activity</h3>
+      <div id="recentActivity"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

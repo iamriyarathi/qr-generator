@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}QuadCode — Professional QR Code Generator{% endblock %}</title>
+<meta name="description" content="Generate premium, fully customizable QR codes for URLs, WiFi, contact cards, WhatsApp and more — free, fast, and privacy-friendly.">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block head %}{% endblock %}
+</head>
+<body>
+
+<div class="qr-noise-bg" aria-hidden="true"></div>
+
+<header class="navbar">
+  <div class="container navbar__inner">
+    <a href="{{ url_for('main.home') }}" class="navbar__brand">
+      <span class="brand-mark"><i class="fa-solid fa-qrcode"></i></span>
+      <span class="brand-name">Quad<span class="accent">Code</span></span>
+    </a>
+
+    <nav class="navbar__links" id="navLinks">
+      <a href="{{ url_for('main.home') }}">Home</a>
+      <a href="{{ url_for('main.generator') }}">Generator</a>
+      <a href="{{ url_for('main.history') }}">History</a>
+      <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+    </nav>
+
+    <div class="navbar__actions">
+      <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle light/dark theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <a href="{{ url_for('main.generator') }}" class="btn btn--primary btn--sm navbar__cta">
+        <i class="fa-solid fa-bolt"></i> Generate QR
+      </a>
+      <button id="navToggle" class="icon-btn navbar__burger" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="brand-mark"><i class="fa-solid fa-qrcode"></i></span>
+      <span class="brand-name">Quad<span class="accent">Code</span></span>
+      <p>Premium QR codes for websites, WiFi, contact cards and more — generated instantly, styled your way.</p>
+    </div>
+
+    <div class="footer__col">
+      <h4>Product</h4>
+      <a href="{{ url_for('main.generator') }}">Generator</a>
+      <a href="{{ url_for('main.history') }}">History</a>
+      <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>QR Types</h4>
+      <a href="{{ url_for('main.generator') }}#type=url">Website URL</a>
+      <a href="{{ url_for('main.generator') }}#type=wifi">WiFi</a>
+      <a href="{{ url_for('main.generator') }}#type=vcard">Contact Card</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Built with</h4>
+      <p class="mono-small">Flask · SQLite · Vanilla JS</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <span>&copy; <span id="year"></span> QuadCode. All rights reserved.</span>
+      <span class="footer__signature">Every module counts. Scan responsibly.</span>
+    </div>
+  </div>
+</footer>
+
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

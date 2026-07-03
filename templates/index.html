@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}QuadCode — Professional QR Code Generator{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div>
+      <span class="eyebrow"><i class="fa-solid fa-sparkles"></i> Nine QR types, infinite styling</span>
+      <h1>Every module has<br>a <span class="accent">job to do.</span></h1>
+      <p class="lead">Generate crisp, on-brand QR codes for links, WiFi, contact cards and more — style the colors, add your logo, and download in PNG, SVG or JPG. No sign-up, no watermark.</p>
+      <div class="hero__ctas">
+        <a href="{{ url_for('main.generator') }}" class="btn btn--primary"><i class="fa-solid fa-bolt"></i> Generate a QR code</a>
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn--secondary"><i class="fa-solid fa-chart-simple"></i> View dashboard</a>
+      </div>
+      <div class="hero__stats">
+        <div><strong>9</strong><span>QR TYPES SUPPORTED</span></div>
+        <div><strong>3</strong><span>EXPORT FORMATS</span></div>
+        <div><strong>100%</strong><span>FREE, NO LIMITS</span></div>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero-qr-frame">
+        <div class="scan-line"></div>
+        {{ demo_svg|safe if demo_svg else '' }}
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#fff;">
+          <rect width="100" height="100" fill="#ffffff"/>
+          <g fill="#0F1420">
+            <rect x="8" y="8" width="24" height="24"/>
+            <rect x="14" y="14" width="12" height="12" fill="#fff"/>
+            <rect x="18" y="18" width="4" height="4"/>
+            <rect x="68" y="8" width="24" height="24"/>
+            <rect x="74" y="14" width="12" height="12" fill="#fff"/>
+            <rect x="78" y="18" width="4" height="4"/>
+            <rect x="8" y="68" width="24" height="24"/>
+            <rect x="14" y="74" width="12" height="12" fill="#fff"/>
+            <rect x="18" y="78" width="4" height="4"/>
+            <rect x="40" y="10" width="4" height="4"/><rect x="48" y="10" width="4" height="4"/><rect x="56" y="14" width="4" height="4"/>
+            <rect x="40" y="20" width="4" height="4"/><rect x="52" y="24" width="4" height="4"/><rect x="60" y="20" width="4" height="4"/>
+            <rect x="36" y="36" width="4" height="4"/><rect x="44" y="36" width="4" height="4"/><rect x="52" y="36" width="4" height="4"/><rect x="60" y="36" width="4" height="4"/><rect x="68" y="36" width="4" height="4"/>
+            <rect x="40" y="44" width="4" height="4"/><rect x="56" y="44" width="4" height="4"/><rect x="72" y="44" width="4" height="4"/>
+            <rect x="36" y="52" width="4" height="4"/><rect x="48" y="52" width="4" height="4"/><rect x="64" y="52" width="4" height="4"/><rect x="80" y="52" width="4" height="4"/>
+            <rect x="44" y="60" width="4" height="4"/><rect x="60" y="60" width="4" height="4"/><rect x="76" y="60" width="4" height="4"/>
+            <rect x="40" y="68" width="4" height="4"/><rect x="52" y="72" width="4" height="4"/><rect x="60" y="68" width="4" height="4"/><rect x="72" y="72" width="4" height="4"/>
+            <rect x="40" y="80" width="4" height="4"/><rect x="48" y="84" width="4" height="4"/><rect x="60" y="80" width="4" height="4"/><rect x="72" y="84" width="4" height="4"/><rect x="80" y="80" width="4" height="4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="floating-chip chip-1"><i class="fa-solid fa-palette"></i> Fully styled</div>
+      <div class="floating-chip chip-2"><i class="fa-solid fa-download"></i> PNG · SVG · JPG</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow"><i class="fa-solid fa-layer-group"></i> Coverage</span>
+      <h2>One generator, every use case</h2>
+      <p>Encode exactly what your audience needs to scan — no third-party redirects, no tracking.</p>
+    </div>
+    <div class="type-grid">
+      <a href="{{ url_for('main.generator') }}#type=url" class="finder-card type-card"><i class="fa-solid fa-link"></i><h3>Website URL</h3><p>Point straight to any page.</p></a>
+      <a href="{{ url_for('main.generator') }}#type=text" class="finder-card type-card"><i class="fa-solid fa-align-left"></i><h3>Plain text</h3><p>Notes, codes, anything.</p></a>
+      <a href="{{ url_for('main.generator') }}#type=email" class="finder-card type-card"><i class="fa-solid fa-envelope"></i><h3>Email</h3><p>Pre-filled subject &amp; body.</p></a>
+      <a href="{{ url_for('main.generator') }}#type=phone" class="finder-card type-card"><i class="fa-solid fa-phone"></i><h3>Phone number</h3><p>One scan to dial.</p></a>
+      <a href="{{ url_for('main.generator') }}#type=sms" class="finder-card type-card"><i class="fa-solid fa-comment-sms"></i><h3>SMS</h3><p>Pre-composed text message.</p></a>
+      <a href="{{ url_for('main.generator') }}#type=whatsapp" class="finder-card type-card"><i class="fa-brands fa-whatsapp"></i><h3>WhatsApp</h3><p>Open a chat instantly.</p></a>
+      <a href="{{ url_for('main.generator') }}#type=wifi" class="finder-card type-card"><i class="fa-solid fa-wifi"></i><h3>WiFi</h3><p>Join a network, no typing.</p></a>
+      <a href="{{ url_for('main.generator') }}#type=location" class="finder-card type-card"><i class="fa-solid fa-location-dot"></i><h3>Google Maps</h3><p>Drop a pin, share a place.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> Why QuadCode</span>
+      <h2>Built like a professional tool</h2>
+      <p>Every detail — from error correction to export format — is yours to control.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="finder-card">
+        <i class="fa-solid fa-palette"></i>
+        <h3>Full styling control</h3>
+        <p>Foreground/background color, border, rounded modules, transparency and embedded logos.</p>
+      </div>
+      <div class="finder-card">
+        <i class="fa-solid fa-file-export"></i>
+        <h3>Export anywhere</h3>
+        <p>Download crisp PNG or JPG rasters, or infinitely scalable SVG for print.</p>
+      </div>
+      <div class="finder-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h3>Adjustable error correction</h3>
+        <p>Choose from L to H so your code keeps scanning even if it's partly covered.</p>
+      </div>
+      <div class="finder-card">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <h3>Full history</h3>
+        <p>Every QR you generate is saved — search it, re-download it, or clear it any time.</p>
+      </div>
+      <div class="finder-card">
+        <i class="fa-solid fa-chart-simple"></i>
+        <h3>Usage dashboard</h3>
+        <p>See totals, today's activity, your most-used type and download counts at a glance.</p>
+      </div>
+      <div class="finder-card">
+        <i class="fa-solid fa-moon"></i>
+        <h3>Dark &amp; light mode</h3>
+        <p>A workspace that's easy on the eyes, whichever way you prefer to work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow"><i class="fa-solid fa-list-ol"></i> Process</span>
+      <h2>Three steps to a scannable code</h2>
+    </div>
+    <div class="steps">
+      <div class="finder-card step-card">
+        <span class="step-num">01 / CHOOSE</span>
+        <h3>Pick a type</h3>
+        <p>URL, WiFi, contact card and six more — each with its own guided form.</p>
+      </div>
+      <div class="finder-card step-card">
+        <span class="step-num">02 / STYLE</span>
+        <h3>Customize it</h3>
+        <p>Colors, size, corners, logo, error correction — tuned live in the preview.</p>
+      </div>
+      <div class="finder-card step-card">
+        <span class="step-num">03 / EXPORT</span>
+        <h3>Download or print</h3>
+        <p>Grab PNG, SVG or JPG, print directly, or come back for it later in History.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2>Ready to generate your first QR code?</h2>
+      <p>It takes less than a minute — and it's completely free.</p>
+      <a href="{{ url_for('main.generator') }}" class="btn btn--primary"><i class="fa-solid fa-bolt"></i> Open the generator</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,304 @@
+{% extends "base.html" %}
+{% block title %}Generator — QuadCode{% endblock %}
+
+{% block content %}
+<div class="container page-head">
+  <span class="eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> Generator</span>
+  <h1>Build your QR code</h1>
+  <p>Pick a type, fill in the details, style it your way — download in PNG, SVG or JPG.</p>
+</div>
+
+<div class="container" style="padding-bottom: 90px;">
+  <form id="qrForm" class="generator-layout" novalidate>
+
+    <div class="generator-col">
+      <div class="panel">
+        <h3><i class="fa-solid fa-shapes"></i> QR type</h3>
+        <div class="type-tabs" id="typeTabs">
+          <button type="button" class="type-tab active" data-type="url"><i class="fa-solid fa-link"></i>Website</button>
+          <button type="button" class="type-tab" data-type="text"><i class="fa-solid fa-align-left"></i>Text</button>
+          <button type="button" class="type-tab" data-type="email"><i class="fa-solid fa-envelope"></i>Email</button>
+          <button type="button" class="type-tab" data-type="phone"><i class="fa-solid fa-phone"></i>Phone</button>
+          <button type="button" class="type-tab" data-type="sms"><i class="fa-solid fa-comment-sms"></i>SMS</button>
+          <button type="button" class="type-tab" data-type="whatsapp"><i class="fa-brands fa-whatsapp"></i>WhatsApp</button>
+          <button type="button" class="type-tab" data-type="wifi"><i class="fa-solid fa-wifi"></i>WiFi</button>
+          <button type="button" class="type-tab" data-type="location"><i class="fa-solid fa-location-dot"></i>Location</button>
+          <button type="button" class="type-tab" data-type="vcard"><i class="fa-solid fa-id-card"></i>Contact</button>
+        </div>
+
+        <!-- URL -->
+        <div class="field-group active" data-group="url">
+          <div class="field">
+            <label for="url">Website URL</label>
+            <input type="text" id="url" name="url" placeholder="https://example.com">
+            <div class="field-error" data-error-for="url"></div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="field-group" data-group="text">
+          <div class="field">
+            <label for="text">Plain text</label>
+            <textarea id="text" name="text" placeholder="Type anythin…"></textarea>
+            <div class="field-error" data-error-for="text"></div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="field-group" data-group="email">
+          <div class="field">
+            <label for="email">Email address</label>
+            <input type="text" id="email" name="email" placeholder="hello@example.com">
+            <div class="field-error" data-error-for="email"></div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="subject">Subject <span class="mono-small">(optional)</span></label>
+              <input type="text" id="subject" name="subject" placeholder="Let's talk">
+            </div>
+            <div class="field">
+              <label for="body">Message <span class="mono-small">(optional)</span></label>
+              <input type="text" id="body" name="body" placeholder="Short message">
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="field-group" data-group="phone">
+          <div class="field">
+            <label for="phone_phone">Phone number</label>
+            <input type="text" id="phone_phone" name="phone" placeholder="xxxxxxxxxx">
+            <div class="field-error" data-error-for="phone"></div>
+          </div>
+        </div>
+
+        <!-- SMS -->
+        <div class="field-group" data-group="sms">
+          <div class="field">
+            <label for="sms_phone">Phone number</label>
+            <input type="text" id="sms_phone" name="phone" placeholder="xxxxxxxxxx">
+            <div class="field-error" data-error-for="phone"></div>
+          </div>
+          <div class="field">
+            <label for="sms_message">Message <span class="mono-small">(optional)</span></label>
+            <textarea id="sms_message" name="message" placeholder="Pre-filled SMS text"></textarea>
+          </div>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="field-group" data-group="whatsapp">
+          <div class="field">
+            <label for="wa_phone">WhatsApp number <span class="mono-small">(with country code)</span></label>
+            <input type="text" id="wa_phone" name="phone" placeholder="+xxxxxxxxxx">
+            <div class="field-error" data-error-for="phone"></div>
+          </div>
+          <div class="field">
+            <label for="wa_message">Message <span class="mono-small">(optional)</span></label>
+            <textarea id="wa_message" name="message" placeholder="Hi! I'd like to know more about…"></textarea>
+          </div>
+        </div>
+
+        <!-- WiFi -->
+        <div class="field-group" data-group="wifi">
+          <div class="field">
+            <label for="ssid">Network name (SSID)</label>
+            <input type="text" id="ssid" name="ssid" placeholder="MyHomeWiFi">
+            <div class="field-error" data-error-for="ssid"></div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="password">Password</label>
+              <input type="text" id="password" name="password" placeholder="••••••••">
+            </div>
+            <div class="field">
+              <label for="encryption">Security</label>
+              <select id="encryption" name="encryption">
+                <option value="WPA">WPA / WPA2</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">None (open network)</option>
+              </select>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <span>Hidden network</span>
+            <label class="switch"><input type="checkbox" id="hidden" name="hidden"><span class="slider-toggle"></span></label>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="field-group" data-group="location">
+          <div class="field-row">
+            <div class="field">
+              <label for="latitude">Latitude</label>
+              <input type="text" id="latitude" name="latitude" placeholder="40.7128">
+              <div class="field-error" data-error-for="latitude"></div>
+            </div>
+            <div class="field">
+              <label for="longitude">Longitude</label>
+              <input type="text" id="longitude" name="longitude" placeholder="-74.0060">
+            </div>
+          </div>
+          <button type="button" class="btn btn--ghost btn--sm" id="useMyLocation">
+            <i class="fa-solid fa-crosshairs"></i> Use my current location
+          </button>
+        </div>
+
+        <!-- vCard -->
+        <div class="field-group" data-group="vcard">
+          <div class="field-row">
+            <div class="field">
+              <label for="first_name">First name</label>
+              <input type="text" id="first_name" name="first_name" placeholder="abc">
+              <div class="field-error" data-error-for="first_name"></div>
+            </div>
+            <div class="field">
+              <label for="last_name">Last name</label>
+              <input type="text" id="last_name" name="last_name" placeholder="xyz">
+              <div class="field-error" data-error-for="last_name"></div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="vcard_phone">Phone</label>
+              <input type="text" id="vcard_phone" name="phone" placeholder="xxxxxxxxxx">
+            </div>
+            <div class="field">
+              <label for="vcard_email">Email</label>
+              <input type="text" id="vcard_email" name="email" placeholder="abc@example.com">
+              <div class="field-error" data-error-for="email"></div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="organization">Company <span class="mono-small">(optional)</span></label>
+              <input type="text" id="organization" name="organization" placeholder="Acme Inc.">
+            </div>
+            <div class="field">
+              <label for="title">Job title <span class="mono-small">(optional)</span></label>
+              <input type="text" id="title" name="title" placeholder="Product Designer">
+            </div>
+          </div>
+          <div class="field">
+            <label for="website">Website <span class="mono-small">(optional)</span></label>
+            <input type="text" id="website" name="website" placeholder="https://example.com">
+          </div>
+          <div class="field">
+            <label for="address">Address <span class="mono-small">(optional)</span></label>
+            <input type="text" id="address" name="address" placeholder="123 Main Street, City, Country">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3><i class="fa-solid fa-sliders"></i> Customization</h3>
+
+        <div class="field">
+          <label>Size <span class="mono-small">(px)</span></label>
+          <div class="range-row">
+            <input type="range" id="size" min="150" max="1000" step="10" value="400">
+            <span class="range-value" id="sizeValue">400px</span>
+          </div>
+        </div>
+
+        <div class="custom-grid">
+          <div class="field">
+            <label>Foreground color</label>
+            <div class="color-field">
+              <button type="button" class="color-swatch" style="background:#000000;">
+                <input type="color" id="fg_color" value="#000000">
+              </button>
+              <input type="text" class="color-hex" id="fg_color_hex" value="#000000" maxlength="7">
+            </div>
+          </div>
+          <div class="field">
+            <label>Background color</label>
+            <div class="color-field">
+              <button type="button" class="color-swatch" style="background:#ffffff;">
+                <input type="color" id="bg_color" value="#ffffff">
+              </button>
+              <input type="text" class="color-hex" id="bg_color_hex" value="#ffffff" maxlength="7">
+            </div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:6px;">
+          <label>Border size <span class="mono-small">(quiet zone, modules)</span></label>
+          <div class="range-row">
+            <input type="range" id="border" min="0" max="12" step="1" value="4">
+            <span class="range-value" id="borderValue">4</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Error correction</label>
+          <div class="ec-options" id="ecOptions">
+            <div class="ec-option" data-ec="L">L<small>~7%</small></div>
+            <div class="ec-option active" data-ec="M">M<small>~15%</small></div>
+            <div class="ec-option" data-ec="Q">Q<small>~25%</small></div>
+            <div class="ec-option" data-ec="H">H<small>~30%</small></div>
+          </div>
+          <p class="hint">Higher correction survives more damage/logo overlap, at the cost of density.</p>
+        </div>
+
+        <div class="toggle-row">
+          <span>Rounded corners</span>
+          <label class="switch"><input type="checkbox" id="rounded"><span class="slider-toggle"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>Transparent background</span>
+          <label class="switch"><input type="checkbox" id="transparent"><span class="slider-toggle"></span></label>
+        </div>
+
+        <div class="field" style="margin-top:10px;">
+          <label>Logo inside QR <span class="mono-small">(optional)</span></label>
+          <div class="logo-upload">
+            <div class="logo-upload__preview" id="logoPreview"><i class="fa-solid fa-image" style="color:var(--text-faint);"></i></div>
+            <div class="logo-upload__text">
+              <b>Upload a logo</b>
+              PNG or JPG · auto-boosts error correction to H
+            </div>
+            <input type="file" id="logo" name="logo" accept=".png,.jpg,.jpeg" style="display:none;">
+            <button type="button" class="btn btn--secondary btn--sm" id="logoBtn">Choose</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn--primary" id="generateBtn"><i class="fa-solid fa-bolt"></i> Generate QR code</button>
+        <button type="button" class="btn btn--secondary" id="copyInputBtn"><i class="fa-regular fa-copy"></i> Copy input</button>
+        <button type="button" class="btn btn--ghost" id="resetBtn"><i class="fa-solid fa-rotate-left"></i> Reset form</button>
+      </div>
+    </div>
+
+    <div class="generator-col">
+      <div class="panel preview-panel">
+        <h3><i class="fa-solid fa-eye"></i> Live preview</h3>
+        <div class="preview-stage" id="previewStage">
+          <div class="preview-stage__empty" id="previewEmpty">
+            <i class="fa-solid fa-qrcode"></i>
+            Fill in the form and hit<br>"Generate QR code" to preview it here.
+          </div>
+          <img id="previewImg" style="display:none;" alt="Generated QR code preview">
+          <div class="preview-loading" id="previewLoading"><div class="spinner"></div></div>
+        </div>
+
+        <div class="preview-actions">
+          <button type="button" class="btn btn--secondary" id="downloadPng" disabled><i class="fa-solid fa-file-image"></i> PNG</button>
+          <button type="button" class="btn btn--secondary" id="downloadSvg" disabled><i class="fa-solid fa-file-code"></i> SVG</button>
+          <button type="button" class="btn btn--secondary" id="downloadJpg" disabled><i class="fa-solid fa-file-image"></i> JPG</button>
+          <button type="button" class="btn btn--secondary" id="printBtn" disabled><i class="fa-solid fa-print"></i> Print</button>
+        </div>
+
+        <div class="preview-meta">
+          <span id="previewType">—</span>
+          <span id="previewEc">—</span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/generator.js') }}"></script>
+{% endblock %}

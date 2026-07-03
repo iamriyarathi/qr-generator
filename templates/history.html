@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}History — QuadCode{% endblock %}
+
+{% block content %}
+<div class="container page-head">
+  <span class="eyebrow"><i class="fa-solid fa-clock-rotate-left"></i> History</span>
+  <h1>Everything you've generated</h1>
+  <p>Search, re-download or remove any QR code you've created.</p>
+</div>
+
+<div class="container" style="padding-bottom: 90px;">
+  <div class="history-toolbar">
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" placeholder="Search by input or type…">
+    </div>
+    <div class="filter-chips" id="filterChips">
+      <button class="filter-chip active" data-type="">All</button>
+      <button class="filter-chip" data-type="url">URL</button>
+      <button class="filter-chip" data-type="text">Text</button>
+      <button class="filter-chip" data-type="email">Email</button>
+      <button class="filter-chip" data-type="phone">Phone</button>
+      <button class="filter-chip" data-type="sms">SMS</button>
+      <button class="filter-chip" data-type="whatsapp">WhatsApp</button>
+      <button class="filter-chip" data-type="wifi">WiFi</button>
+      <button class="filter-chip" data-type="location">Location</button>
+      <button class="filter-chip" data-type="vcard">Contact</button>
+    </div>
+  </div>
+
+  <div id="historyContainer">
+    <div class="history-table-wrap">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>QR</th>
+            <th>Type</th>
+            <th>Input</th>
+            <th>Created</th>
+            <th>Downloads</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <i class="fa-solid fa-inbox"></i>
+      <p>No QR codes yet — <a href="{{ url_for('main.generator') }}" class="accent">generate your first one</a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}
