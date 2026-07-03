@@ -16,7 +16,12 @@ from database import db as db_module
 
 
 def create_app():
-    app = Flask(__name__, static_folder="static", template_folder="templates")
+    app = Flask(
+    __name__,
+    static_folder="public/static",
+    static_url_path="/static",
+    template_folder="templates",
+    )
     app.config.from_object(Config)
 
     # Blueprints
